@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Flex Diet AI
 
-## Getting Started
+![Logo](./src/assets/favicon.ico)
 
-First, run the development server:
+Welcome to the repository for Flex Diet AI, an innovative application designed to deliver personalized nutrition plans using advanced AI technology.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## About The Application
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Flex Diet AI leverages the power of AI to create diet plans tailored to individual user preferences and health goals. It’s an easy-to-use app aimed at enhancing the wellness journey of our users.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Built With
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This application is built with the following technologies:
 
-## Learn More
+- **Next.js**: A React framework for production, which enables server-side rendering and generates static websites for React based web applications.
+- **Tailwind CSS**: A utility-first CSS framework packed with classes like `flex`, `pt-4`, `text-center`, and `rotate-90` that can be composed to build any design, directly in your markup.
 
-To learn more about Next.js, take a look at the following resources:
+## Status
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The application is currently in production, which means we are actively developing the app. New features are being added, and improvements are being made. Stay tuned for updates and feature rollouts.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Contributing
 
-## Deploy on Vercel
+While Flex Diet AI is still under development, we appreciate any feedback or contributions that can help improve the app. If you're interested in contributing, please reach out to us.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Thank you for your interest in Flex Diet AI - your partner in personalized nutrition and health!
