@@ -2,20 +2,21 @@ import React, { useEffect, ComponentType } from 'react';
 import { useRouter } from 'next/router';
 import { isAuthenticated } from './auth';
 
-const withProtectedAccess = <P extends {}>(WrappedComponent: ComponentType<P>) => {
-  const AuthenticatedComponent: ComponentType<P> = (props) => {
+const withProtectedAccess = <P extends object>(WrappedComponent: ComponentType<P>, redirectToHomeIfLoggedIn = false) => {
+  return (props: P) => {
     const router = useRouter();
 
     useEffect(() => {
-      if (!isAuthenticated()) {
+      const loggedIn = isAuthenticated();
+      if (!loggedIn) {
         router.push('/login');
+      } else if (loggedIn && redirectToHomeIfLoggedIn && router.pathname === '/login') {
+        router.push('/');
       }
-    }, [router]);
+    }, [router, redirectToHomeIfLoggedIn]);
 
-    return <WrappedComponent {...props as P} />;
+    return <WrappedComponent {...props} />;
   };
-
-  return AuthenticatedComponent;
 };
 
 export default withProtectedAccess;
