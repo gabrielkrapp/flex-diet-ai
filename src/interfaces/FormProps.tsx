@@ -1,0 +1,3 @@
+interface FormProps {
+    isRegistering: boolean;
+}
