@@ -5,6 +5,7 @@ import axios from 'axios';
 import { AuthFormFields } from "../Molecules/AuthFormFields";
 import { AuthButton } from "../Atoms/AuthButton";
 import { validateAuthFormField } from "@/utils/validateAuthFormField";
+import { setStorageItem } from "@/utils/localStorage";
 
 export const AuthForm: React.FC<FormProps> = ({ isRegistering }) => {
   const [formData, setFormData] = useState<LoginFormData>({ email: "", password: "" });
@@ -30,7 +31,7 @@ export const AuthForm: React.FC<FormProps> = ({ isRegistering }) => {
     },
     {
       onSuccess: (data) => {
-        localStorage.setItem("authToken", data.data.token);
+        setStorageItem(process.env.NEXT_PUBLIC_USER_TOKEN!, data.data.token);
         router.push("/");
       },
       onError: (error: any) => {

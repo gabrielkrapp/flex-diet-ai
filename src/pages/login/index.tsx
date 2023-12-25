@@ -1,5 +1,4 @@
 import { AuthForm } from "@/components/UI/Organisms/AuthForm";
-import withProtectedAccess from "@/utils/withProtectedAccess";
 import { useState } from "react";
 
 const LoginPage = () => {
@@ -46,4 +45,4 @@ const LoginPage = () => {
   );
 };
 
-export default withProtectedAccess(LoginPage, true);
+export default LoginPage;

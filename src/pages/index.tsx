@@ -1,5 +1,3 @@
-import withProtectedAccess from "@/utils/withProtectedAccess"
-
 function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
@@ -12,4 +10,4 @@ function Home() {
   )
 }
 
-export default withProtectedAccess(Home)
+export default Home
