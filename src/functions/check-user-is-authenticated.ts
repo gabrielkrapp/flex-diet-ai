@@ -1,7 +1,7 @@
-import { getStorageItem } from "@/utils/localStorage";
+import { NextRequest } from "next/server";
 
-export const checkUserAuthenticated = () => {
-  const userToken = getStorageItem(process.env.NEXT_PUBLIC_USER_TOKEN!);
+export const checkUserAuthenticated = (request: NextRequest) => {
+  const userToken = request.cookies.get(process.env.NEXT_PUBLIC_USER_TOKEN!)?.value
 
-  return !!userToken;
+  return userToken;
 };

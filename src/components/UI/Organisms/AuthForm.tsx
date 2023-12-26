@@ -4,25 +4,25 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import { AuthFormFields } from "../Molecules/AuthFormFields";
 import { AuthButton } from "../Atoms/AuthButton";
-import { validateAuthFormField } from "@/utils/validateAuthFormField";
-import { setStorageItem } from "@/utils/localStorage";
+import { validateAuthFormField } from "@/utils/validateAuthForm/validateAuthFormField";
+import Cookie from 'js-cookie';
+import { FormErrorMessages } from "../Molecules/FormErrorMessages";
 
 export const AuthForm: React.FC<FormProps> = ({ isRegistering }) => {
-  const [formData, setFormData] = useState<LoginFormData>({ email: "", password: "" });
-  const [formErrors, setFormErrors] = useState<LoginFormData>({ email: "", password: "" });
+  const initialState = isRegistering ? { email: "", password: "", name: "" } : { email: "", password: "" };
+  const [formData, setFormData] = useState<LoginFormData>(initialState);
+  const [formErrors, setFormErrors] = useState<LoginFormData>(initialState);
   const [serverError, setServerError] = useState<string>("");
   const router = useRouter();
 
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    if (isRegistering) {
-      setFormErrors((prev) => ({
-        ...prev,
-        [name]: validateAuthFormField(name, value)
-      }));
-    }
-  }, [isRegistering]);
+    setFormErrors((prev) => ({
+      ...prev,
+      [name]: validateAuthFormField(name, value)
+    }));
+  }, []);
 
   const authMutation = useMutation(
     () => {
@@ -31,12 +31,11 @@ export const AuthForm: React.FC<FormProps> = ({ isRegistering }) => {
     },
     {
       onSuccess: (data) => {
-        setStorageItem(process.env.NEXT_PUBLIC_USER_TOKEN!, data.data.token);
+        Cookie.set(process.env.NEXT_PUBLIC_USER_TOKEN!, data.data.token)
         router.push("/");
       },
-      onError: (error: any) => {
-        console.error(error);
-        setServerError("Failed to authenticate. Please try again.");
+      onError: () => {
+        setServerError("Falha ao autenticar, por favor tente novamente.");
       },
     }
   );
@@ -53,12 +52,17 @@ export const AuthForm: React.FC<FormProps> = ({ isRegistering }) => {
   return (
     <form className="mt-8" onSubmit={handleSubmit}>
       <div className="rounded-md shadow-sm">
-        <AuthFormFields formData={formData} handleInputChange={handleInputChange} />
+        <AuthFormFields formData={formData} handleInputChange={handleInputChange} isRegistering={isRegistering} />
       </div>
       <div className="mt-6">
         <AuthButton text={!isRegistering ? "Logar" : "Registrar"} isDisabled={hasErrors} />
       </div>
-      {authMutation.isError && <ErrorMessage message={serverError || "Failed to authenticate."} />}
+      <FormErrorMessages 
+        formErrors={formErrors} 
+        isRegistering={isRegistering} 
+        mutationError={authMutation.isError}
+        serverErrorMessage={serverError}
+      />
     </form>
   );
 };
