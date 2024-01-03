@@ -1,20 +1,22 @@
-import axios from "axios";
-import router from "next/router";
+import axiosInstance from '@/utils/axiosInstance';
+import { useRouter } from 'next/router';
 import { useMutation } from "react-query";
 
-export const createDiet = async () => {
-    const authMutation = useMutation(
-        () => {
-          return axios.post(`${process.env.NEXT_BACKEND_URL}/creatediet`);
-        },
-        {
-          onSuccess: (data) => {
-            router.push("/");
-          },
-          onError: () => {
-          },
-        }
-    );
+export const useCreateDiet = () => {
+  const router = useRouter();
 
-    return authMutation.mutate();
+  const authMutation = useMutation(
+    () => axiosInstance.post(`${process.env.NEXT_BACKEND_URL}/creatediet`),
+    {
+      onSuccess: (data) => {
+        const dietName = data.data.name;
+        router.push(`/${dietName}`);
+      },
+      onError: (error) => {
+        // Lidar com o erro aqui, talvez exibir uma mensagem para o usuário
+      },
+    }
+  );
+
+  return authMutation;
 }
