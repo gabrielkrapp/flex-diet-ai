@@ -1,12 +1,17 @@
 import React from 'react';
 import AddIcon from '@mui/icons-material/Add';
-import { createDiet } from '@/functions/create-diet';
+import { useCreateDiet } from '@/functions/create-diet';
 
 export const CreateDiet = () => {
+
+  const handleCreateDiet = async () => {
+    await useCreateDiet()
+  };
+
   return (
     <div 
     className="w-32 h-32 border-2 border-black rounded-lg flex flex-col items-center justify-center font-mono text-sm bg-white hover:border-[#18E1C2] hover:bg-[#18E1C2] hover:text-white cursor-pointer transform hover:scale-110 transition-transform duration-200"
-    onClick={() => createDiet()}
+    onClick={() => handleCreateDiet()}
     >
         <div className="text-4xl mb-2">
             <AddIcon 

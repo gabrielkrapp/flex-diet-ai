@@ -9,17 +9,17 @@ export const useCreateDiet = () => {
   const authMutation = useMutation(
     () => axiosInstance.post(`${process.env.NEXT_BACKEND_URL}/creatediet`),
     {
-      onSuccess: (data) => {
-        const dietName = data.data.name;
-        router.push(`/${dietName}`);
-      },
-      onError: (error) => {
-        if (axios.isAxiosError(error) && error.response?.status === 402) {
-            // Abrir modal
-        } else {
-          // Abrir Alerta
-        }
-      },
+        onSuccess: (data) => {
+            const dietName = data.data.name;
+            router.push(`/${dietName}`);
+        },
+        onError: (error) => {
+            if (axios.isAxiosError(error) && error.response?.status === 402) {
+                    // Abrir modal
+            } else {
+                // alerta de erro
+            }
+        },
     }
   );
 

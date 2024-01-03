@@ -1,5 +1,5 @@
-import React, { useState, useEffect, ReactNode } from 'react';
-import Alert, { AlertProps } from '@mui/material/Alert';
+import React, { useState, useEffect } from 'react';
+import Alert from '@mui/material/Alert';
 import { CustomAlertProps } from '@/interfaces/CustomAlertProps';
 
 export const CustomAlert: React.FC<CustomAlertProps> = ({ variant, severity, children }) => {
