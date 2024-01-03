@@ -1,16 +1,41 @@
-import { Navbar } from "@/components/UI/Organisms/Navbar"
+import { useEffect, useState } from 'react';
+import { CreateDiet } from "@/components/UI/Atoms/CreateDiet";
+import { ShowDiet } from "@/components/UI/Atoms/ShowDiet";
+import { Navbar } from "@/components/UI/Organisms/Navbar";
+import { LoadingComponent } from '@/components/UI/Atoms/LoadingComponent';
+import { useCreateDiet } from '@/hooks/useCreateDiets';
+import { useFetchDiets } from '@/hooks/useFetchDiets';
+import { CustomAlert } from '@/components/UI/Atoms/Alerts';
 
 function Home() {
+  const { mutate, isLoading, isError } = useCreateDiet();
+  const { data: diets, refetch } = useFetchDiets();
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    refetch();
+  }, []);
+
+  const handleCreateDiet = () => {
+    mutate();
+  };
+
+  if (isLoading) {
+    return <LoadingComponent />;
+  }
+
   return (
     <main>
       <Navbar />
-      <div className="w-full items-center justify-center font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Flex Diet Ai
-        </p>
+      {isError && (
+        <CustomAlert severity="error">Ocorreu um erro ao carregar suas dietas.</CustomAlert>
+      )}
+      <div className="w-full items-center justify-center font-mono text-sm lg:flex mt-5">
+        <CreateDiet createDietHandler={handleCreateDiet} />
+        {diets && diets.length > 0 && <ShowDiet diets={diets} />}
       </div>
     </main>
-  )
+  );
 }
 
-export default Home
+export default Home;
