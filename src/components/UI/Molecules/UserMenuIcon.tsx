@@ -16,7 +16,7 @@ export const UserMenuIcon = () => {
           fontSize: 40,
           cursor: 'pointer',
           '&:hover': {
-            color: 'primary.main',
+            color: '#18E1C2',
             transform: 'scale(1.1)',
           }
         }} 

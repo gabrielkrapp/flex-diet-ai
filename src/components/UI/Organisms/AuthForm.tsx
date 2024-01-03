@@ -43,7 +43,9 @@ export const AuthForm: React.FC<FormProps> = ({ isRegistering }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isRegistering || (isRegistering && !Object.values(formErrors).some((error) => error))) {
-      authMutation.mutate();
+      // authMutation.mutate();
+      Cookie.set(process.env.NEXT_PUBLIC_USER_TOKEN!, "token")
+      router.push("/");
     }
   };
 
