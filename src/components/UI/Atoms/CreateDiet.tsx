@@ -1,27 +1,17 @@
 import React from 'react';
 import AddIcon from '@mui/icons-material/Add';
-import { useCreateDiet } from '@/functions/create-diet';
+import { CreateDietProps } from '@/interfaces/CreateDietProps';
 
-export const CreateDiet = () => {
-
-  const handleCreateDiet = async () => {
-    await useCreateDiet()
-  };
-
+export const CreateDiet: React.FC<CreateDietProps> = ({ createDietHandler }) => {
   return (
     <div 
-    className="w-32 h-32 border-2 border-black rounded-lg flex flex-col items-center justify-center font-mono text-sm bg-white hover:border-[#18E1C2] hover:bg-[#18E1C2] hover:text-white cursor-pointer transform hover:scale-110 transition-transform duration-200"
-    onClick={() => handleCreateDiet()}
+      className="w-32 h-32 border-2 border-black rounded-lg flex flex-col items-center justify-center font-mono text-sm bg-white hover:border-[#18E1C2] hover:bg-[#18E1C2] hover:text-white cursor-pointer transform hover:scale-110 transition-transform duration-200"
+      onClick={createDietHandler}
     >
-        <div className="text-4xl mb-2">
-            <AddIcon 
-                sx={{ 
-                    fontSize: 40, 
-                    color: 'inherit',
-                }} 
-            />
-        </div>
-        <p>Criar Dieta</p>
+      <div className="text-4xl mb-2">
+        <AddIcon sx={{ fontSize: 40, color: 'inherit' }} />
+      </div>
+      <p>Criar Dieta</p>
     </div>
   );
-}
+};
