@@ -1,4 +1,5 @@
 import axiosInstance from '@/utils/axiosInstance';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useMutation } from "react-query";
 
@@ -13,7 +14,11 @@ export const useCreateDiet = () => {
         router.push(`/${dietName}`);
       },
       onError: (error) => {
-        // Lidar com o erro aqui, talvez exibir uma mensagem para o usuário
+        if (axios.isAxiosError(error) && error.response?.status === 402) {
+            // Abrir modal
+        } else {
+          // Abrir Alerta
+        }
       },
     }
   );
