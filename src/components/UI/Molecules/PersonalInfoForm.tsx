@@ -1,7 +1,8 @@
 import React, { ChangeEvent } from 'react';
 import TextField from '@mui/material/TextField';
-import { FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
-import { VisibilityOff, Visibility } from '@mui/icons-material';
+import { Grid, InputAdornment } from '@mui/material';
+import { PasswordField } from '../Atoms/PasswordField';
+import { EmailField } from '../Atoms/EmailField';
 
 interface FormData {
   firstName: string;
@@ -22,11 +23,6 @@ export const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ formData, se
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-
-  const [showPassword, setShowPassword] = React.useState(false);
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => event.preventDefault();
 
   return (
     <div>
@@ -73,36 +69,10 @@ export const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ formData, se
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
-            label="Email"
-            name="email"
-            type="email"
-            fullWidth
-            value={formData.email}
-            onChange={handleChange}
-          />
+          <EmailField value={formData.email} onChange={handleChange} />
         </Grid>
         <Grid item xs={6}>
-          <FormControl variant="outlined" fullWidth>
-            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-password"
-              type={showPassword ? 'text' : 'password'}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label="Password"
-            />
-          </FormControl>
+          <PasswordField value={formData.password} onChange={handleChange} />
         </Grid>
       </Grid>
     </div>

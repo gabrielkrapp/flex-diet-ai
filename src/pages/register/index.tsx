@@ -31,7 +31,7 @@ export default function MultiStepForm() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="p-6 rounded-lg shadow-2xl bg-white max-w-2xl w-full"> {/* Ajuste na classe de sombra */}
+      <div className="p-6 rounded-lg shadow-2xl bg-white max-w-2xl w-full">
         <HorizontalLinearStepper
         activeStep={activeStep}
         handleNext={handleNext}
