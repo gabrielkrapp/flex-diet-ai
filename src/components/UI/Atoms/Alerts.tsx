@@ -18,8 +18,10 @@ export const CustomAlert: React.FC<CustomAlertProps> = ({ variant, severity, chi
   const alertProps = { ...variant ? { variant } : {}, severity };
 
   return (
-    <Alert {...alertProps}>
-      {children}
-    </Alert>
+    <div className="fixed top-5 right-5 z-50">
+      <Alert {...alertProps}>
+        {children}
+      </Alert>
+    </div>
   );
 };

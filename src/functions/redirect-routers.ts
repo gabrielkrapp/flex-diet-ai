@@ -1,22 +1,30 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { checkUserAuthenticated } from './check-user-is-authenticated'
+import { NextRequest, NextResponse } from 'next/server';
+import { checkUserAuthenticated } from './check-user-is-authenticated';
 
 export const redirectRouters = (request: NextRequest) => {
+    const checkUser = checkUserAuthenticated(request);
 
-    const checkUser = checkUserAuthenticated(request)
-
-    const signInUrl = new URL("/login", request.url)
-    const homeUrl = new URL("/", request.url)
+    const signInUrl = new URL("/login", request.url);
+    const homeUrl = new URL("/", request.url);
     
+    // Lista de rotas públicas
+    const publicRoutes = ["/login", "/register"];
+
     if (!checkUser) {
-        if (request.nextUrl.pathname === "/login") {
-            return NextResponse.next()
+        // Se a rota atual estiver na lista de rotas públicas, permite acesso
+        if (publicRoutes.includes(request.nextUrl.pathname)) {
+            return NextResponse.next();
         }
 
-        return NextResponse.redirect(signInUrl)
+        // Redireciona para o login se não estiver autenticado
+        return NextResponse.redirect(signInUrl);
     }
 
-    if (request.nextUrl.pathname === "/login") {
-        return NextResponse.redirect(homeUrl)
+    // Se o usuário está autenticado e tenta acessar uma rota pública, redireciona para a home
+    if (publicRoutes.includes(request.nextUrl.pathname)) {
+        return NextResponse.redirect(homeUrl);
     }
-}
+
+    // Continua para a próxima resposta se nenhuma das condições acima for satisfeita
+    return NextResponse.next();
+};
