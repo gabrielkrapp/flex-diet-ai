@@ -55,7 +55,7 @@ export default function Register() {
             {activeStep === 0 && <PersonalInfoForm formData={formData} setFormData={setFormData} />}
             {activeStep === 1 && <PreferencesForm formData={formData} setFormData={setFormData} />}
           </StepperForm>
-          {isError && <CustomAlert severity="error">Ocorreu algum erro no registro</CustomAlert>}
+          {isError && <CustomAlert variant="filled" severity="error">Ocorreu algum erro no registro</CustomAlert>}
         </div>
       )}
     </div>
