@@ -4,7 +4,6 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 
 interface HorizontalLinearStepperProps {
   activeStep: number;
@@ -36,7 +35,6 @@ export default function HorizontalLinearStepper({
       <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, justifyContent: 'space-between' }}>
         <Button
           color="inherit"
-          disabled={activeStep === 0}
           onClick={handleBack}
         >
           Voltar

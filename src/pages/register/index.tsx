@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { PersonalInfoForm } from '@/components/UI/Molecules/PersonalInfoForm';
 import { DietaryPreferencesForm } from '@/components/UI/Molecules/DietaryPreferencesForm';
 import HorizontalLinearStepper from '@/components/UI/Organisms/StepperForm';
+import { useRouter } from 'next/router';
 
 export default function MultiStepForm() {
+  const router = useRouter();
   const [activeStep, setActiveStep] = useState(0);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -20,7 +22,11 @@ export default function MultiStepForm() {
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    if (activeStep === 0) {
+      router.push('/login');
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    }
   };
 
   return (
