@@ -1,10 +1,5 @@
-import React, { ChangeEvent } from 'react';
 import TextField from '@mui/material/TextField';
-
-interface EmailFieldProps {
-  value: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-}
+import { EmailFieldProps } from '@/interfaces/EmailFieldProps';
 
 export const EmailField: React.FC<EmailFieldProps> = ({ value, onChange }) => {
   return (

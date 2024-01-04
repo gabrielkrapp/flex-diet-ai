@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { PersonalInfoForm } from '@/components/UI/Molecules/PersonalInfoForm';
-import { DietaryPreferencesForm } from '@/components/UI/Molecules/DietaryPreferencesForm';
-import HorizontalLinearStepper from '@/components/UI/Organisms/StepperForm';
+import { PreferencesForm } from '@/components/UI/Molecules/PreferencesForm';
 import { useRouter } from 'next/router';
+import { RegistrationFormData } from '@/interfaces/RegistrationFormData';
+import StepperForm from '@/components/UI/Organisms/StepperForm';
+import { steps } from '@/utils/steps';
+import { useRegister } from '@/hooks/useRegister';
+import { CustomAlert } from '@/components/UI/Atoms/Alerts';
+import { LoadingComponent } from '@/components/UI/Atoms/LoadingComponent';
 
-export default function MultiStepForm() {
+export default function Register() {
   const router = useRouter();
+  const { mutate, isLoading, isError } = useRegister();
   const [activeStep, setActiveStep] = useState(0);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<RegistrationFormData>({
     firstName: '',
     lastName: '',
     dateOfBirth: '',
@@ -29,18 +35,29 @@ export default function MultiStepForm() {
     }
   };
 
+  const handleSubmit = () => {
+    if (activeStep === steps.length - 1) {
+      mutate(formData);
+    } else {
+      handleNext();
+    }
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="p-6 rounded-lg shadow-2xl bg-white max-w-2xl w-full">
-        <HorizontalLinearStepper
-        activeStep={activeStep}
-        handleNext={handleNext}
-        handleBack={handleBack}
-      >
-        {activeStep === 0 && <PersonalInfoForm formData={formData} setFormData={setFormData} />}
-        {activeStep === 1 && <DietaryPreferencesForm formData={formData} setFormData={setFormData} />}
-      </HorizontalLinearStepper>
-      </div>
+      {isLoading ? <LoadingComponent /> : (
+        <div className="p-6 rounded-lg shadow-2xl bg-white max-w-2xl w-full">
+          <StepperForm
+            activeStep={activeStep}
+            handleNext={handleSubmit}
+            handleBack={handleBack}
+          >
+            {activeStep === 0 && <PersonalInfoForm formData={formData} setFormData={setFormData} />}
+            {activeStep === 1 && <PreferencesForm formData={formData} setFormData={setFormData} />}
+          </StepperForm>
+          {isError && <CustomAlert severity="error">Ocorreu algum erro no registro</CustomAlert>}
+        </div>
+      )}
     </div>
   );
 }

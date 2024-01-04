@@ -8,12 +8,6 @@ import { validateAuthFormField } from "@/utils/validateAuthForm/validateAuthForm
 import Cookie from 'js-cookie';
 import { FormErrorMessages } from "../Molecules/FormErrorMessages";
 
-// Tipagem para os dados do formulário
-interface LoginFormData {
-  email: string;
-  password: string;
-}
-
 export const AuthForm: React.FC = () => {
   const initialState = { email: "", password: "" };
   const [formData, setFormData] = useState<LoginFormData>(initialState);

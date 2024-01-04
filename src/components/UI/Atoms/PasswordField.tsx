@@ -1,11 +1,7 @@
-import React, { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-
-interface PasswordFieldProps {
-  value: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-}
+import { PasswordFieldProps } from '@/interfaces/PasswordFieldProps';
 
 export const PasswordField: React.FC<PasswordFieldProps> = ({ value, onChange }) => {
   const [showPassword, setShowPassword] = useState(false);

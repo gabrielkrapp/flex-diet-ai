@@ -1,7 +1,7 @@
 import React from 'react';
 import { Checkbox, FormControlLabel } from '@mui/material';
 
-export const DietaryPreferencesForm = ({ formData, setFormData }: any) => {
+export const PreferencesForm = ({ formData, setFormData }: any) => {
   const handleChange = (event: any) => {
     setFormData({ ...formData, [event.target.name]: event.target.checked });
   };

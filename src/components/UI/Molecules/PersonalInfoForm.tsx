@@ -3,21 +3,7 @@ import TextField from '@mui/material/TextField';
 import { Grid, InputAdornment } from '@mui/material';
 import { PasswordField } from '../Atoms/PasswordField';
 import { EmailField } from '../Atoms/EmailField';
-
-interface FormData {
-  firstName: string;
-  lastName: string;
-  height: string;
-  dateOfBirth: string;
-  email: string;
-  password: string;
-  vegan: boolean;
-}
-
-interface PersonalInfoFormProps {
-  formData: FormData;
-  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
-}
+import { PersonalInfoFormProps } from '@/interfaces/PersonalInfoFormProps';
 
 export const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ formData, setFormData }) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

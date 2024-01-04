@@ -4,22 +4,15 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
+import { StepperFormProps } from '@/interfaces/StepperFormProps';
+import { steps } from '@/utils/steps';
 
-interface HorizontalLinearStepperProps {
-  activeStep: number;
-  handleNext: () => void;
-  handleBack: () => void;
-  children: React.ReactNode;
-}
-
-const steps = ['Informações Pessoais', 'Informações sobre alimentação', 'Registrar-se'];
-
-export default function HorizontalLinearStepper({
+export default function StepperForm({
   activeStep,
   handleNext,
   handleBack,
   children
-}: HorizontalLinearStepperProps) {
+}: StepperFormProps) {
   return (
     <Box sx={{ width: '100%' }}>
       <Stepper activeStep={activeStep}>
