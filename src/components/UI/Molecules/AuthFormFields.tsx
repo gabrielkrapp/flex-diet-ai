@@ -1,19 +1,8 @@
 import { InputField } from "../Atoms/InputField";
 
-export const AuthFormFields: React.FC<AuthFormFieldsProps> = ({ formData, handleInputChange, isRegistering }) => {
+export const AuthFormFields: React.FC<AuthFormFieldsProps> = ({ formData, handleInputChange }) => {
   return (
     <>
-      {isRegistering && (
-        <InputField
-          label="Nome"
-          name="name"
-          type="text"
-          required
-          placeholder="Nome"
-          value={formData.name}
-          onChange={handleInputChange}
-        />
-      )}
       <InputField
         label="Email"
         name="email"

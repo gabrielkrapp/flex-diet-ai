@@ -8,8 +8,14 @@ import { validateAuthFormField } from "@/utils/validateAuthForm/validateAuthForm
 import Cookie from 'js-cookie';
 import { FormErrorMessages } from "../Molecules/FormErrorMessages";
 
-export const AuthForm: React.FC<FormProps> = ({ isRegistering }) => {
-  const initialState = isRegistering ? { email: "", password: "", name: "" } : { email: "", password: "" };
+// Tipagem para os dados do formulário
+interface LoginFormData {
+  email: string;
+  password: string;
+}
+
+export const AuthForm: React.FC = () => {
+  const initialState = { email: "", password: "" };
   const [formData, setFormData] = useState<LoginFormData>(initialState);
   const [formErrors, setFormErrors] = useState<LoginFormData>(initialState);
   const [serverError, setServerError] = useState<string>("");
@@ -17,21 +23,18 @@ export const AuthForm: React.FC<FormProps> = ({ isRegistering }) => {
 
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    setFormErrors((prev) => ({
+    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormErrors(prev => ({
       ...prev,
       [name]: validateAuthFormField(name, value)
     }));
   }, []);
 
   const authMutation = useMutation(
-    () => {
-      const url = isRegistering ? `${process.env.NEXT_BACKEND_URL}/register` : `${process.env.NEXT_BACKEND_URL}/login`;
-      return axios.post(url, formData);
-    },
+    () => axios.post(`${process.env.NEXT_BACKEND_URL}/login`, formData),
     {
       onSuccess: (data) => {
-        Cookie.set(process.env.NEXT_PUBLIC_USER_TOKEN!, data.data.token)
+        Cookie.set(process.env.NEXT_PUBLIC_USER_TOKEN!, data.data.token);
         router.push("/");
       },
       onError: () => {
@@ -42,24 +45,23 @@ export const AuthForm: React.FC<FormProps> = ({ isRegistering }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!isRegistering || (isRegistering && !Object.values(formErrors).some((error) => error))) {
+    if (!Object.values(formErrors).some(error => error)) {
       authMutation.mutate();
     }
   };
 
-  const hasErrors = isRegistering && Object.values(formErrors).some((error) => error);
+  const hasErrors = Object.values(formErrors).some(error => error);
 
   return (
     <form className="mt-8" onSubmit={handleSubmit}>
       <div className="rounded-md shadow-sm">
-        <AuthFormFields formData={formData} handleInputChange={handleInputChange} isRegistering={isRegistering} />
+        <AuthFormFields formData={formData} handleInputChange={handleInputChange} />
       </div>
       <div className="mt-6">
-        <AuthButton text={!isRegistering ? "Logar" : "Registrar"} isDisabled={hasErrors} />
+        <AuthButton text="Logar" isDisabled={hasErrors} />
       </div>
       <FormErrorMessages 
         formErrors={formErrors} 
-        isRegistering={isRegistering} 
         mutationError={authMutation.isError}
         serverErrorMessage={serverError}
       />
