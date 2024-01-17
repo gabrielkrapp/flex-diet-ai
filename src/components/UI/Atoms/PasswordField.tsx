@@ -11,7 +11,7 @@ export const PasswordField: React.FC<PasswordFieldProps> = ({ value, onChange })
 
   return (
     <FormControl variant="outlined" fullWidth>
-      <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+      <InputLabel htmlFor="outlined-adornment-password">Senha</InputLabel>
       <OutlinedInput
         id="outlined-adornment-password"
         type={showPassword ? 'text' : 'password'}
