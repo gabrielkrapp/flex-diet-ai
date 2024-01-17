@@ -8,6 +8,7 @@ import { steps } from '@/utils/steps';
 import { useRegister } from '@/hooks/useRegister';
 import { CustomAlert } from '@/components/UI/Atoms/Alerts';
 import { LoadingComponent } from '@/components/UI/Atoms/LoadingComponent';
+import { BiotipoSelector } from '@/components/UI/Molecules/BiotipoSelector';
 
 export default function Register() {
   const router = useRouter();
@@ -21,6 +22,7 @@ export default function Register() {
     email: '',
     password: '',
     vegan: false,
+    biotipo: '',
   });
 
   const handleNext = () => {
@@ -43,17 +45,22 @@ export default function Register() {
     }
   };
 
+  const handleBiotipoChange = (biotipo: string) => {
+    setFormData({ ...formData, biotipo });
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       {isLoading ? <LoadingComponent /> : (
-        <div className="p-6 rounded-lg shadow-2xl bg-white max-w-2xl w-full">
+        <div className="p-6 rounded-lg shadow-2xl bg-white max-w-3xl w-full">
           <StepperForm
             activeStep={activeStep}
             handleNext={handleSubmit}
             handleBack={handleBack}
           >
             {activeStep === 0 && <PersonalInfoForm formData={formData} setFormData={setFormData} />}
-            {activeStep === 1 && <PreferencesForm formData={formData} setFormData={setFormData} />}
+            {activeStep === 1 && <BiotipoSelector onChange={handleBiotipoChange} selectedBiotipo={formData.biotipo} />}
+            {activeStep === 2 && <PreferencesForm formData={formData} setFormData={setFormData} />}
           </StepperForm>
           {isError && <CustomAlert variant="filled" severity="error">Ocorreu algum erro no registro</CustomAlert>}
         </div>

@@ -1,6 +1,7 @@
 export const steps = 
 [
     'Informações Pessoais', 
-    'Informações sobre alimentação', 
+    'Biotipo',
+    'Alimentação', 
     'Registrar-se'
 ];
