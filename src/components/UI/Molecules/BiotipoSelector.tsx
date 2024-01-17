@@ -4,7 +4,7 @@ import { BiotipoSelectorProps } from '@/interfaces/BiotipoSelectorProps';
 
 export const BiotipoSelector: React.FC<BiotipoSelectorProps> = ({ selectedBiotipo, onChange }) => {
   return (
-    <div className="flex space-x-4">
+    <div className="flex flex-col space-y-4">
       <BiotipoBox 
         title="Ectomorfo"
         description={BIOTIPO_DESCRIPTIONS.Ectomorfo}
@@ -14,15 +14,15 @@ export const BiotipoSelector: React.FC<BiotipoSelectorProps> = ({ selectedBiotip
        />
        <BiotipoBox
         title="Mesomorfo"
-        description="Breve descrição do Mesomorfo"
-        imageSrc={BIOTIPO_DESCRIPTIONS.Mesomorfo}
+        description={BIOTIPO_DESCRIPTIONS.Mesomorfo}
+        imageSrc="/assets/mesomorfo.jpg"
         isSelected={selectedBiotipo === "Mesomorfo"}
         onSelect={() => onChange("Mesomorfo")}
        />
        <BiotipoBox
         title="Endomorfo"
-        description="Breve descrição do Endomorfo"
-        imageSrc={BIOTIPO_DESCRIPTIONS.Endomorfo}
+        description={BIOTIPO_DESCRIPTIONS.Endomorfo}
+        imageSrc="/assets/endomorfo.jpg"
         isSelected={selectedBiotipo === "Endomorfo"}
         onSelect={() => onChange("Endomorfo")}
        />
