@@ -23,6 +23,9 @@ export default function Register() {
     password: '',
     vegan: false,
     biotipo: '',
+    diabetes: false,
+    lactose: false,
+    gluten: false,
   });
 
   const handleNext = () => {

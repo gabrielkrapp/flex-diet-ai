@@ -7,4 +7,7 @@ export interface RegistrationFormData {
     password: string;
     vegan: boolean;
     biotipo: string;
+    diabetes: boolean;
+    lactose: boolean;
+    gluten: boolean;
 }
