@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PersonalInfoForm } from '@/components/UI/Molecules/PersonalInfoForm';
-import { PreferencesForm } from '@/components/UI/Molecules/PreferencesForm';
+import { RestrictionsForm } from '@/components/UI/Molecules/RestrictionsForm';
 import { useRouter } from 'next/router';
 import { RegistrationFormData } from '@/interfaces/RegistrationFormData';
 import StepperForm from '@/components/UI/Organisms/StepperForm';
@@ -60,7 +60,7 @@ export default function Register() {
           >
             {activeStep === 0 && <PersonalInfoForm formData={formData} setFormData={setFormData} />}
             {activeStep === 1 && <BiotipoSelector onChange={handleBiotipoChange} selectedBiotipo={formData.biotipo} />}
-            {activeStep === 2 && <PreferencesForm formData={formData} setFormData={setFormData} />}
+            {activeStep === 2 && <RestrictionsForm formData={formData} setFormData={setFormData} />}
           </StepperForm>
           {isError && <CustomAlert variant="filled" severity="error">Ocorreu algum erro no registro</CustomAlert>}
         </div>
