@@ -1,6 +1,7 @@
 export interface RegistrationFormData {
     firstName: string;
     lastName: string;
+    weight: string;
     height: string;
     dateOfBirth: string;
     email: string;

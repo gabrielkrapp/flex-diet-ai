@@ -9,6 +9,7 @@ import { useRegister } from '@/hooks/useRegister';
 import { CustomAlert } from '@/components/UI/Atoms/Alerts';
 import { LoadingComponent } from '@/components/UI/Atoms/LoadingComponent';
 import { BiotipoSelector } from '@/components/UI/Molecules/BiotipoSelector';
+import { validateForm } from '@/utils/validateForm';
 
 export default function Register() {
   const router = useRouter();
@@ -19,6 +20,7 @@ export default function Register() {
     lastName: '',
     dateOfBirth: '',
     height: '',
+    weight: '',
     email: '',
     password: '',
     vegan: false,
@@ -27,9 +29,19 @@ export default function Register() {
     lactose: false,
     gluten: false,
   });
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    let errors = {};
+    
+    if (activeStep === 0) {
+      errors = validateForm(formData);
+      setFormErrors(errors);
+    }
+  
+    if (activeStep !== 0 || Object.keys(errors).length === 0) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
 
   const handleBack = () => {
@@ -61,7 +73,7 @@ export default function Register() {
             handleNext={handleSubmit}
             handleBack={handleBack}
           >
-            {activeStep === 0 && <PersonalInfoForm formData={formData} setFormData={setFormData} />}
+            {activeStep === 0 && <PersonalInfoForm formData={formData} setFormData={setFormData} formErrors={formErrors} />}
             {activeStep === 1 && <BiotipoSelector onChange={handleBiotipoChange} selectedBiotipo={formData.biotipo} />}
             {activeStep === 2 && <RestrictionsForm formData={formData} setFormData={setFormData} />}
           </StepperForm>
