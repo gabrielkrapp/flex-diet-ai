@@ -1,6 +1,6 @@
 import { RegistrationFormData } from "@/interfaces/RegistrationFormData";
 
-export const validateForm = (formData: RegistrationFormData): Record<string, string> => {
+export const validateForm = (formData: RegistrationFormData, validateBiotipo = true): Record<string, string> => {
   let errors: Record<string, string> = {};
 
   if (!formData.firstName.trim()) {
@@ -33,6 +33,10 @@ export const validateForm = (formData: RegistrationFormData): Record<string, str
     errors.password = 'Senha é obrigatória';
   } else if (formData.password.length < 8) {
     errors.password = 'Senha deve ter pelo menos 8 caracteres';
+  }
+
+  if (validateBiotipo && !formData.biotipo.trim()) {
+    errors.biotipo = '*Seleção do biotipo é obrigatória';
   }
 
   return errors;

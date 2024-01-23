@@ -2,7 +2,7 @@ import { BIOTIPO_DESCRIPTIONS } from '@/utils/BiotiposDescriptios';
 import { BiotipoBox } from '../Atoms/BiotipoBox';
 import { BiotipoSelectorProps } from '@/interfaces/BiotipoSelectorProps';
 
-export const BiotipoSelector: React.FC<BiotipoSelectorProps> = ({ onChange, selectedBiotipo }) => {
+export const BiotipoSelector: React.FC<BiotipoSelectorProps> = ({ onChange, selectedBiotipo, error, errorMessage }) => {
 
   return (
     <div className="flex flex-col space-y-4 pr-20 pl-20">
@@ -27,6 +27,9 @@ export const BiotipoSelector: React.FC<BiotipoSelectorProps> = ({ onChange, sele
         isSelected={selectedBiotipo === "Endomorfo"}
         onSelect={() => onChange("Endomorfo")}
        />
+      {error && (
+        <p className="text-red-600 text-sm mt-2">{errorMessage}</p>
+      )}
     </div>
     );
 };

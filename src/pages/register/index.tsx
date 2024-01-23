@@ -33,16 +33,22 @@ export default function Register() {
 
   const handleNext = () => {
     let errors = {};
-    
+  
     if (activeStep === 0) {
-      errors = validateForm(formData);
-      setFormErrors(errors);
+      errors = validateForm(formData, false);
     }
   
-    if (activeStep !== 0 || Object.keys(errors).length === 0) {
+    if (activeStep === 1) {
+      errors = validateForm(formData, true);
+    }
+  
+    setFormErrors(errors);
+  
+    if (Object.keys(errors).length === 0) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
   };
+  
 
   const handleBack = () => {
     if (activeStep === 0) {
@@ -74,7 +80,7 @@ export default function Register() {
             handleBack={handleBack}
           >
             {activeStep === 0 && <PersonalInfoForm formData={formData} setFormData={setFormData} formErrors={formErrors} />}
-            {activeStep === 1 && <BiotipoSelector onChange={handleBiotipoChange} selectedBiotipo={formData.biotipo} />}
+            {activeStep === 1 && <BiotipoSelector onChange={handleBiotipoChange} selectedBiotipo={formData.biotipo} error={Boolean(formErrors.biotipo)} errorMessage={formErrors.biotipo} />}
             {activeStep === 2 && <RestrictionsForm formData={formData} setFormData={setFormData} />}
           </StepperForm>
           {isError && <CustomAlert variant="filled" severity="error">Ocorreu algum erro no registro</CustomAlert>}
