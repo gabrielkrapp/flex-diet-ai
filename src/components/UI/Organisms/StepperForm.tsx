@@ -22,7 +22,7 @@ export default function StepperForm({
           </Step>
         ))}
       </Stepper>
-      <Box sx={{ mt: 6, mb: 2 }}>
+      <Box sx={{ mt: 4, mb: 2 }}>
         {children}
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, justifyContent: 'space-between' }}>
