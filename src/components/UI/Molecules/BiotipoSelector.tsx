@@ -9,21 +9,21 @@ export const BiotipoSelector: React.FC<BiotipoSelectorProps> = ({ onChange, sele
       <BiotipoBox 
         title="Ectomorfo"
         description={BIOTIPO_DESCRIPTIONS.Ectomorfo}
-        imageSrc="/assets/ectomorfo.jpg"
+        imageSrc="/assets/ectomorfo.png"
         isSelected={selectedBiotipo === "Ectomorfo"}
         onSelect={() => onChange("Ectomorfo")}
        />
        <BiotipoBox
         title="Mesomorfo"
         description={BIOTIPO_DESCRIPTIONS.Mesomorfo}
-        imageSrc="/assets/mesomorfo.jpg"
+        imageSrc="/assets/mesomorfo.png"
         isSelected={selectedBiotipo === "Mesomorfo"}
         onSelect={() => onChange("Mesomorfo")}
        />
        <BiotipoBox
         title="Endomorfo"
         description={BIOTIPO_DESCRIPTIONS.Endomorfo}
-        imageSrc="/assets/endomorfo.jpg"
+        imageSrc="/assets/endomorfo.png"
         isSelected={selectedBiotipo === "Endomorfo"}
         onSelect={() => onChange("Endomorfo")}
        />
