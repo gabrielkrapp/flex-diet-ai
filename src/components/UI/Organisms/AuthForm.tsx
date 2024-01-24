@@ -4,24 +4,20 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import { AuthFormFields } from "../Molecules/AuthFormFields";
 import { AuthButton } from "../Atoms/AuthButton";
-import { validateAuthFormField } from "@/utils/validateAuthForm/validateAuthFormField";
 import Cookie from 'js-cookie';
-import { FormErrorMessages } from "../Molecules/FormErrorMessages";
+import { validateLoginForm } from "@/utils/validateLoginForm";
+import { CustomAlert } from "../Atoms/Alerts";
+import { LoginFormErrors } from "@/interfaces/LoginFormErrors";
 
 export const AuthForm: React.FC = () => {
-  const initialState = { email: "", password: "" };
+  const initialState: LoginFormData = { email: "", password: "" };
   const [formData, setFormData] = useState<LoginFormData>(initialState);
-  const [formErrors, setFormErrors] = useState<LoginFormData>(initialState);
-  const [serverError, setServerError] = useState<string>("");
+  const [formErrors, setFormErrors] = useState<LoginFormErrors>({});
   const router = useRouter();
 
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    setFormErrors(prev => ({
-      ...prev,
-      [name]: validateAuthFormField(name, value)
-    }));
   }, []);
 
   const authMutation = useMutation(
@@ -32,33 +28,30 @@ export const AuthForm: React.FC = () => {
         router.push("/");
       },
       onError: () => {
-        setServerError("Falha ao autenticar, por favor tente novamente.");
+        <CustomAlert severity="error">Falha ao autenticar, por favor tente novamente.</CustomAlert>
       },
     }
   );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!Object.values(formErrors).some(error => error)) {
+
+    const errors = validateLoginForm(formData);
+    setFormErrors(errors);
+
+    if (!Object.values(errors).some(error => error)) {
       authMutation.mutate();
     }
   };
 
-  const hasErrors = Object.values(formErrors).some(error => error);
-
   return (
     <form className="mt-8" onSubmit={handleSubmit}>
       <div className="rounded-md shadow-sm">
-        <AuthFormFields formData={formData} handleInputChange={handleInputChange} />
+        <AuthFormFields formData={formData} handleInputChange={handleInputChange} formErrors={formErrors} />
       </div>
       <div className="mt-6">
-        <AuthButton text="Logar" isDisabled={hasErrors} />
+        <AuthButton text="Logar" isDisabled={Object.values(formErrors).some(error => error)} />
       </div>
-      <FormErrorMessages 
-        formErrors={formErrors} 
-        mutationError={authMutation.isError}
-        serverErrorMessage={serverError}
-      />
     </form>
   );
 };
