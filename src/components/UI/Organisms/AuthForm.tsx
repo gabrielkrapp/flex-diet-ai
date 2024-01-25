@@ -40,7 +40,9 @@ export const AuthForm: React.FC = () => {
     setFormErrors(errors);
 
     if (!Object.values(errors).some(error => error)) {
-      authMutation.mutate();
+      //authMutation.mutate();
+      Cookie.set(process.env.NEXT_PUBLIC_USER_TOKEN!, "teste");
+      router.push("/");
     }
   };
 
