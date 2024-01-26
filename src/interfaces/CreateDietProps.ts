@@ -1,3 +1,3 @@
 export interface CreateDietProps {
-    createDietHandler: () => void;
+    handleOpenModal: () => void;
 }
