@@ -6,11 +6,11 @@ export const useCreateDiet = () => {
   const router = useRouter();
 
   const { mutate, isLoading, isError, error } = useMutation(
-    () => axiosInstance.post(`${process.env.NEXT_BACKEND_URL}/creatediet`),
+    (dietOptions: string) => axiosInstance.post(`${process.env.NEXT_BACKEND_URL}/creatediet`, dietOptions),
     {
         onSuccess: (data) => {
-            const dietName = data.data.name;
-            router.push(`/${dietName}`);
+          const dietName = data.data.name;
+          router.push(`/${dietName}`);
         },
     }
   );

@@ -9,17 +9,12 @@ import { CustomAlert } from '@/components/UI/Atoms/Alerts';
 import { ModalDiet } from '@/components/UI/Molecules/ModalDiet';
 
 function Home() {
-  //const { mutate, isLoading, isError } = useCreateDiet();
   const { data: diets, refetch, isLoading, isError } = useFetchDiets();
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     //refetch();
   }, []);
-
-  //const handleCreateDiet = () => {
-    //mutate();
-  //};
 
   //if (isLoading) {
     //return <LoadingComponent />;
