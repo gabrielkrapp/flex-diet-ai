@@ -1,6 +1,7 @@
 import React from 'react';
 import { DietOptionBox } from '../Atoms/DietOptionBox';
 import { DietOptionProps } from '@/interfaces/DietOptionProps';
+import { dietItems } from '@/components/statics/dietNames';
 
 export const DietOption: React.FC<DietOptionProps> = ({dietOptions, setDietOptions}) => {
 
@@ -10,20 +11,14 @@ export const DietOption: React.FC<DietOptionProps> = ({dietOptions, setDietOptio
 
   return (
     <div className="flex justify-around items-center space-x-4 mb-4 mt-8">
-      <DietOptionBox
-        title="Carnívora"
-        isSelected={dietOptions === "carnivora"}
-        onSelect={() => handleSelectDiet("carnivora")} />
-      <DietOptionBox
-        title="Vegana"
-        isSelected={dietOptions === "vegana"}
-        onSelect={() => handleSelectDiet("vegana")}
-      />
-      <DietOptionBox
-        title="Vegetariana"
-        isSelected={dietOptions === "vegetariana"}
-        onSelect={() => handleSelectDiet("vegetariana")}
-      />
+      {dietItems.map(dietName => (
+        <DietOptionBox
+          key={dietName}
+          title={dietName}
+          isSelected={dietOptions === dietName.toLowerCase()}
+          onSelect={() => handleSelectDiet(dietName.toLowerCase())}
+        />
+      ))}
     </div>
   );
 };
