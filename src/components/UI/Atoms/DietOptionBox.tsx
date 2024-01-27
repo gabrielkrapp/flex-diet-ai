@@ -1,24 +1,11 @@
-import { MdOutlineFastfood, MdOutlineGrass, MdOutlineLocalFlorist } from 'react-icons/md';
 import { DietOptionBoxProps } from '@/interfaces/DietOptionBoxProps';
+import { getDietIcon } from '@/functions/get-diet-icon';
 
 export const DietOptionBox: React.FC<DietOptionBoxProps> = ({
   title,
   isSelected,
   onSelect,
 }) => {
-  const getIcon = (title: string) => {
-    const iconClassName = `w-6 h-6 ${isSelected || 'group-hover:text-white'}`;
-    switch (title) {
-      case 'Carnívora':
-        return <MdOutlineFastfood className={iconClassName} />;
-      case 'Vegana':
-        return <MdOutlineGrass className={iconClassName} />;
-      case 'Vegetariana':
-        return <MdOutlineLocalFlorist className={iconClassName} />;
-      default:
-        return null;
-    }
-  };
 
   return (
     <div 
@@ -27,7 +14,7 @@ export const DietOptionBox: React.FC<DietOptionBoxProps> = ({
         hover:bg-blue-700 hover:border-blue-700`}
       onClick={onSelect}
     >
-      {getIcon(title)}
+      {getDietIcon(title, isSelected)}
       <div className="ml-4">
         <h3 className={`text-lg font-semibold group-hover:text-white ${isSelected ? 'text-white' : 'text-gray-600'}`}>{title}</h3>
       </div>

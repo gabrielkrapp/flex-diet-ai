@@ -3,4 +3,5 @@ export interface FoodBoxProps {
     isSelected: boolean;
     onSelect: () => void;
     icon: React.ReactNode;
+    isDisabled: boolean;
 }

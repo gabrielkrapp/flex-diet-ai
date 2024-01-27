@@ -4,7 +4,7 @@ import { RestrictionsForm } from '@/components/UI/Molecules/RestrictionsForm';
 import { useRouter } from 'next/router';
 import { RegistrationFormData } from '@/interfaces/RegistrationFormData';
 import StepperForm from '@/components/UI/Organisms/StepperForm';
-import { steps } from '@/utils/steps';
+import { steps } from '@/components/statics/steps';
 import { useRegister } from '@/hooks/useRegister';
 import { CustomAlert } from '@/components/UI/Atoms/Alerts';
 import { LoadingComponent } from '@/components/UI/Atoms/LoadingComponent';

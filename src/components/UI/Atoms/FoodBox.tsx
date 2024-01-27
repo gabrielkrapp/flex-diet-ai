@@ -4,7 +4,8 @@ export const FoodBox: React.FC<FoodBoxProps> = ({
   title,
   isSelected,
   onSelect,
-  icon
+  icon,
+  isDisabled
 }) => {
 
   const iconClassName = `text-2xl ${isSelected || 'group-hover:text-white'}`;
@@ -12,9 +13,9 @@ export const FoodBox: React.FC<FoodBoxProps> = ({
   return (
     <div 
       className={`group flex items-center justify-start p-4 border-2 rounded-lg cursor-pointer transition-colors duration-300 
-        ${isSelected ? 'bg-blue-700 text-white border-blue-700' : 'bg-white text-gray-600 border-gray-600'}
-        hover:bg-blue-700 hover:border-blue-700`}
-      onClick={onSelect}
+      ${isSelected ? 'bg-blue-700 text-white border-blue-700' : 'bg-white text-gray-600 border-gray-600'}
+      hover:bg-blue-700 hover:border-blue-700 ${isDisabled && 'opacity-50 cursor-not-allowed'}`}
+      onClick={!isDisabled ? onSelect : undefined}
     >
       <span className={iconClassName}>{icon}</span>
       <div className="ml-4">

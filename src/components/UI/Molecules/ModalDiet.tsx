@@ -6,6 +6,7 @@ import { DietOption } from './DietOption';
 import { useState } from 'react';
 import { Button, Typography } from '@mui/material';
 import { FoodOption } from './FoodOption';
+import { ErrorMessage } from '../Atoms/ErrorMessage';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -25,10 +26,15 @@ export const ModalDiet: React.FC<ModalDietProps> = ({ modalOpen, setModalOpen })
   const { mutate, isLoading, isError } = useCreateDiet();
   const [dietOptions, setDietOptions] = useState('');
   const [foodSelections, setFoodSelections] = useState<Record<string, boolean>>({});
+  const [error, setError] = useState('');
 
   const handleCreateDiet = () => {
-    mutate({ dietType: dietOptions, foodSelections });
-    setModalOpen(false)
+    if (!dietOptions) {
+      setError('Selecione um tipo de dieta');
+    } else {
+      mutate({ dietType: dietOptions, foodSelections });
+      setModalOpen(false)
+    }
   };
 
   return (
@@ -41,7 +47,8 @@ export const ModalDiet: React.FC<ModalDietProps> = ({ modalOpen, setModalOpen })
           <Typography variant="h6" className="text-lg font-semibold text-center text-gray-800 mb-3">Selecione um tipo de dieta</Typography>
           <DietOption dietOptions={dietOptions} setDietOptions={setDietOptions} />
           <Typography variant="h6" className="text-lg font-semibold text-center text-gray-800 mt-8">Selecione os alimentos de sua preferência</Typography>
-          <FoodOption foodSelections={foodSelections} setFoodSelections={setFoodSelections} />
+          <FoodOption foodSelections={foodSelections} setFoodSelections={setFoodSelections} selectedDiet={dietOptions} />
+          {error && <ErrorMessage message={"Selecione um tipo de dieta"} />}
           <Button 
             variant="outlined"
             color="inherit"
