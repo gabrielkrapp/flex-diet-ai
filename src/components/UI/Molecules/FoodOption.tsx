@@ -6,15 +6,15 @@ import { TbMeat } from 'react-icons/tb';
 import { CiWheat } from 'react-icons/ci';
 import { PiPlant } from 'react-icons/pi';
 
-export const FoodOption: React.FC<FoodOptionProps> = ({ foodSelections, setFoodSelections }) => {
+export const FoodOption: React.FC<FoodOptionProps> = ({ foodSelections, setFoodSelections, selectedDiet }) => {
 
-    const handleSelectFood = (food: string) => {
-      setFoodSelections(prevOptions => {
-        const updatedOptions = { ...prevOptions };
-        updatedOptions[food] = !updatedOptions[food];
-        return updatedOptions;
-      });
-    };;
+  const handleSelectFood = (food: string) => {
+    setFoodSelections(prevOptions => {
+      const updatedOptions = { ...prevOptions };
+      updatedOptions[food] = !updatedOptions[food];
+      return updatedOptions;
+    });
+  };;
 
   const getIcon = (food: string) => {
     switch (food) {
@@ -49,6 +49,16 @@ export const FoodOption: React.FC<FoodOptionProps> = ({ foodSelections, setFoodS
     "Aves", "Peixe", "Carne", "Leite", "Fruta", "Legumes", "Ovo", "Cereais", "Pães", "Suco", "Vegetais"
   ];
 
+  const isDisabled = (food: string) => {
+    if (selectedDiet === "vegana" && ["Aves", "Peixe", "Carne", "Leite", "Ovo"].includes(food)) {
+      return true;
+    }
+    if (selectedDiet === "vegetariana" && ["Aves", "Peixe", "Carne"].includes(food)) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <div className="flex flex-wrap justify-center gap-4 mt-5">
       {foodItems.map(food => (
@@ -58,6 +68,7 @@ export const FoodOption: React.FC<FoodOptionProps> = ({ foodSelections, setFoodS
           isSelected={!!foodSelections[food]}
           icon={getIcon(food)}
           onSelect={() => handleSelectFood(food)}
+          isDisabled={isDisabled(food)}
         />
       ))}
     </div>
