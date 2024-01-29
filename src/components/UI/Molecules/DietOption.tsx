@@ -1,7 +1,7 @@
 import React from 'react';
 import { DietOptionBox } from '../Atoms/DietOptionBox';
 import { DietOptionProps } from '@/interfaces/DietOptionProps';
-import { dietItems } from '@/components/statics/dietNames';
+import { dietItems } from '@/statics/dietNames';
 
 export const DietOption: React.FC<DietOptionProps> = ({dietOptions, setDietOptions}) => {
 
