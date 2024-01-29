@@ -16,9 +16,7 @@ function Home() {
     //refetch();
   }, []);
 
-  //if (isLoading) {
-    //return <LoadingComponent />;
-  //}
+  // if (isLoading) return <LoadingComponent />;
 
   const handleOpenModal = () => {
     setModalOpen(true)

@@ -23,7 +23,7 @@ const style = {
 
 export const ModalDiet: React.FC<ModalDietProps> = ({ modalOpen, setModalOpen }) => {
   const handleClose = () => setModalOpen(false);
-  const { mutate, isLoading, isError } = useCreateDiet();
+  const { mutate } = useCreateDiet();
   const [dietOptions, setDietOptions] = useState('');
   const [foodSelections, setFoodSelections] = useState<Record<string, boolean>>({});
   const [error, setError] = useState('');
