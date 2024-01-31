@@ -23,6 +23,8 @@ const rows = [
   createRow('Jantar', 'Quinoa cozida (1 xícara), Salmão grelhado (150g), Aspargos grelhados (1 xícara), Batata doce cozida (1 média)', 400)
 ];
 
+const totalCalories = rows.reduce((sum, row) => sum + row.calories, 0);
+
 export default function TableDiet() {
   return (
     <TableContainer component={Paper} className="shadow-lg rounded-lg overflow-hidden my-5">
@@ -44,6 +46,10 @@ export default function TableDiet() {
               <TableCell align="center">{row.calories}</TableCell>
             </TableRow>
           ))}
+          <TableRow>
+            <TableCell colSpan={2} className="text-lg font-semibold">Total de Calorias</TableCell>
+            <TableCell align="center" className="text-lg font-semibold">{totalCalories}</TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </TableContainer>
