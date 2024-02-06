@@ -1,12 +1,14 @@
-import React from 'react';
 import { DietOptionBox } from '../Atoms/DietOptionBox';
 import { DietOptionProps } from '@/interfaces/DietOptionProps';
 import { dietItems } from '@/statics/dietNames';
+import { deselectFoodOption } from '@/functions/deselect-food-option';
 
-export const DietOption: React.FC<DietOptionProps> = ({dietOptions, setDietOptions}) => {
-
-  const handleSelectDiet = (diet: string) => {
-    setDietOptions(diet);
+export const DietOption: React.FC<DietOptionProps> = ({ dietOptions, setDietOptions, foodSelections, setFoodSelections }) => {
+  const handleSelectDiet = (selectedDiet: string) => {
+    setDietOptions(selectedDiet);
+    
+    const updatedSelections = deselectFoodOption(selectedDiet, foodSelections);
+    setFoodSelections(updatedSelections);
   };
 
   return (

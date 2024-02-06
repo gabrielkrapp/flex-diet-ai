@@ -10,8 +10,8 @@ export const DietOptionBox: React.FC<DietOptionBoxProps> = ({
   return (
     <div 
       className={`group flex items-center justify-start p-4 border-2 rounded-lg cursor-pointer transition-colors duration-300 
-        ${isSelected ? 'bg-blue-700 text-white border-blue-700' : 'bg-white text-gray-600 border-gray-600'}
-        hover:bg-blue-700 hover:border-blue-700`}
+        ${isSelected ? 'bg-[#18E1C2] text-white border-[#18E1C2]' : 'bg-white text-gray-600 border-gray-600'}
+        hover:bg-[#18E1C2] hover:border-[#18E1C2]`}
       onClick={onSelect}
     >
       {getDietIcon(title, isSelected)}
