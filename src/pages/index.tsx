@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { CreateDiet } from "@/components/UI/Atoms/CreateDiet";
 import { ShowDiet } from "@/components/UI/Atoms/ShowDiet";
 import { Navbar } from "@/components/UI/Organisms/Navbar";
-import { LoadingComponent } from '@/components/UI/Atoms/LoadingComponent';
-import { useCreateDiet } from '@/hooks/useCreateDiets';
 import { useFetchDiets } from '@/hooks/useFetchDiets';
 import { CustomAlert } from '@/components/UI/Atoms/Alerts';
 import { ModalDiet } from '@/components/UI/Molecules/ModalDiet';
@@ -16,9 +14,7 @@ function Home() {
     //refetch();
   }, []);
 
-  //if (isLoading) {
-    //return <LoadingComponent />;
-  //}
+  // if (isLoading) return <LoadingComponent />;
 
   const handleOpenModal = () => {
     setModalOpen(true)

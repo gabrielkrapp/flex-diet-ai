@@ -5,7 +5,7 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import { StepperFormProps } from '@/interfaces/StepperFormProps';
-import { steps } from '@/components/statics/steps';
+import { steps } from '@/statics/steps';
 
 export default function StepperForm({
   activeStep,

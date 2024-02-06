@@ -1,6 +1,6 @@
 import { FoodOptionProps } from '@/interfaces/FoodOptionProps';
 import { FoodBox } from '../Atoms/FoodBox';
-import { foodItems } from '@/components/statics/foodNames';
+import { foodItems } from '@/statics/foodNames';
 import { isFoodDisabled } from '@/functions/food-disabled';
 import { getFoodIcon } from '@/functions/get-food-icon';
 

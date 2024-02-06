@@ -23,7 +23,7 @@ const style = {
 
 export const ModalDiet: React.FC<ModalDietProps> = ({ modalOpen, setModalOpen }) => {
   const handleClose = () => setModalOpen(false);
-  const { mutate, isLoading, isError } = useCreateDiet();
+  const { mutate } = useCreateDiet();
   const [dietOptions, setDietOptions] = useState('');
   const [foodSelections, setFoodSelections] = useState<Record<string, boolean>>({});
   const [error, setError] = useState('');
@@ -45,7 +45,7 @@ export const ModalDiet: React.FC<ModalDietProps> = ({ modalOpen, setModalOpen })
       >
         <Box sx={style}>
           <Typography variant="h6" className="text-lg font-semibold text-center text-gray-800 mb-3">Selecione um tipo de dieta</Typography>
-          <DietOption dietOptions={dietOptions} setDietOptions={setDietOptions} />
+          <DietOption dietOptions={dietOptions} setDietOptions={setDietOptions} setFoodSelections={setFoodSelections} />
           <Typography variant="h6" className="text-lg font-semibold text-center text-gray-800 mt-8">Selecione os alimentos de sua preferência</Typography>
           <FoodOption foodSelections={foodSelections} setFoodSelections={setFoodSelections} selectedDiet={dietOptions} />
           {error && <ErrorMessage message={"Selecione um tipo de dieta"} />}

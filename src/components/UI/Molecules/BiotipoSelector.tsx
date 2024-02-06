@@ -1,4 +1,4 @@
-import { BIOTIPO_DESCRIPTIONS } from '@/components/statics/BiotiposDescriptios';
+import { BIOTIPO_DESCRIPTIONS } from '@/statics/BiotiposDescriptios';
 import { BiotipoBox } from '../Atoms/BiotipoBox';
 import { BiotipoSelectorProps } from '@/interfaces/BiotipoSelectorProps';
 

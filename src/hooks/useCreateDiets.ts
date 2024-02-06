@@ -10,8 +10,8 @@ export const useCreateDiet = () => {
       axiosInstance.post(`${process.env.NEXT_BACKEND_URL}/creatediet`, dietData),
     {
       onSuccess: (data) => {
-        const dietName = data.data.name;
-        router.push(`/${dietName}`);
+        const dietId = data.data.id;
+        router.push(`/${dietId}`);
       },
     }
   );
