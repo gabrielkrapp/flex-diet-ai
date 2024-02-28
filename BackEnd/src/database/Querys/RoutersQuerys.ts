@@ -1,0 +1,1 @@
+export const RegisterUserQuery = "INSERT INTO users (id, username, password) VALUES ($1, $2, $3)";
