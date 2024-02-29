@@ -1,4 +1,4 @@
-import { createUser } from '../../src/routers/Register/CreateUser';
+import { createUser } from '../../../src/routers/Register/CreateUser';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();

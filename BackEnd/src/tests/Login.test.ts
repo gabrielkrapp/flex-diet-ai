@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { app } from '../src/index';
+import { app } from '../../src/index';
 
 describe('/login route', () => {
   beforeAll(async () => {

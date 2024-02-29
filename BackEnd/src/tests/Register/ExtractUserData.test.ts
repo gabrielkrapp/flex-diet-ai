@@ -1,4 +1,4 @@
-import { extractUserData } from '../../src/routers/Register/ExtractUserData';
+import { extractUserData } from '../../../src/routers/Register/ExtractUserData';
 
 describe('extractUserData', () => {
   it('should extract user data correctly', async () => {

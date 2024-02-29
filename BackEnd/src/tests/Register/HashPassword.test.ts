@@ -1,4 +1,4 @@
-import { hashPassword } from '../../src/routers/Register/HashPassword';
+import { hashPassword } from '../../../src/routers/Register/HashPassword';
 
 describe('hashPassword', () => {
   it('should hash the password', async () => {
