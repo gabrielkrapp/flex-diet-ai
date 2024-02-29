@@ -8,7 +8,7 @@ export const useRegister = () => {
   const router = useRouter();
 
   const { mutate, isLoading, isError, error } = useMutation(
-    (newUser: RegistrationFormData) => axiosInstance.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/register`, newUser),
+    (newUser: RegistrationFormData) => axiosInstance.post(`/register`, newUser),
     {
         onSuccess: (data) => {
           Cookie.set(process.env.NEXT_PUBLIC_USER_TOKEN!, data.data.token);

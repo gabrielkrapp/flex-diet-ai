@@ -1,1 +1,0 @@
-export const GetUserByUsernameQuery = "SELECT username FROM users WHERE username = $1";

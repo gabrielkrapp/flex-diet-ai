@@ -2,6 +2,7 @@ import express from "express";
 import { hashPassword } from "./HashPassword";
 import { createUser } from "./CreateUser";
 import { extractUserData } from "./ExtractUserData";
+import generateToken from "../../utils/GenerateToken";
 
 const router = express.Router();
 
@@ -10,10 +11,8 @@ router.post("/register", async (req, res) => {
     const userData = await extractUserData(req.body);
     const hashedPassword = await hashPassword(userData.password);
     const newUser = await createUser(userData, hashedPassword);
-    return res.status(200).json({
-      message: "User registered successfully",
-      user: newUser,
-    });
+    const token = generateToken(newUser.id);
+    return res.status(200).json({ token });
   } catch (error) {
     console.error("Error registering user:", error);
 
