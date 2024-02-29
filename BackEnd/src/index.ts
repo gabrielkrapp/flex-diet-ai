@@ -3,7 +3,7 @@ import cors from 'cors';
 import register from './routers/Register/Register';
 import login from './routers/Login';
 
-const app = express();
+export const app = express();
 const PORT = 80;
 
 app.use(cors());
