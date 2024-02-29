@@ -21,7 +21,7 @@ export const AuthForm: React.FC = () => {
   }, []);
 
   const authMutation = useMutation(
-    () => axios.post(`${process.env.NEXT_BACKEND_URL}/login`, formData),
+    () => axios.post(`/login`, formData),
     {
       onSuccess: (data) => {
         Cookie.set(process.env.NEXT_PUBLIC_USER_TOKEN!, data.data.token);
@@ -40,9 +40,7 @@ export const AuthForm: React.FC = () => {
     setFormErrors(errors);
 
     if (!Object.values(errors).some(error => error)) {
-      //authMutation.mutate();
-      Cookie.set(process.env.NEXT_PUBLIC_USER_TOKEN!, "teste");
-      router.push("/");
+      authMutation.mutate();
     }
   };
 
