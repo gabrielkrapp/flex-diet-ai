@@ -43,7 +43,6 @@ describe('/register route', () => {
     expect(response.body).toHaveProperty('token');
   });
 
-  // Teste para verificar o registro com um email existente
   it('should not register a user with an existing email', async () => {
     const userData = {
       email: 'test@example.com',
@@ -60,10 +59,8 @@ describe('/register route', () => {
       gluten: false,
     };
 
-    // Primeira tentativa de registro
     await request(app).post('/register').send(userData);
 
-    // Segunda tentativa de registro com o mesmo email
     const response = await request(app)
       .post('/register')
       .send(userData);
@@ -72,10 +69,8 @@ describe('/register route', () => {
     expect(response.body.error).toBe('Email already exists');
   });
 
-  // Teste para requerer todos os campos obrigatórios
   it('should require all mandatory fields', async () => {
     const userData = {
-      // Dados intencionalmente incompletos
       email: 'incomplete@example.com',
     };
 
