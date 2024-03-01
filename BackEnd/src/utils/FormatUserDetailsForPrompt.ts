@@ -14,6 +14,6 @@ export function formatUserDetailsForPrompt(userDetails: {
       userDetails.gluten ? 'intolerância ao gluten' : '',
     ].filter(Boolean).join(', ');
   
-    return `Idade: ${age}, Peso: ${userDetails.weight}, Biotipo: ${userDetails.biotipo}, ${healthConditions ? `Condições de saúde: ${healthConditions}` : ''}`;
+    return `Idade: ${age} anos, Peso: ${userDetails.weight}kg, Biotipo: ${userDetails.biotipo}, ${healthConditions ? `Condições de saúde: ${healthConditions}` : ''}`;
   }
   

@@ -24,13 +24,14 @@ router.post('/creatediet', verifyToken, async (req, res) => {
   const chatGptPrompt = await generatePromptForDietPlan(userId, dietType, foodSelections);
 
   try {
-    const dietPlan = await chatGptService.generateDietPlan(chatGptPrompt);
+    const chatGPTResponse = await chatGptService.generateDietPlan(chatGptPrompt);
+    const dietData = JSON.parse(chatGPTResponse.choices[0].text.trim());
     const newDiet = await prisma.diet.create({
       data: {
         userId,
-        breakfast: dietPlan.breakfast,
-        lunch: dietPlan.lunch,
-        dinner: dietPlan.dinner,
+        breakfast: dietData.cafe_da_manha.prato,
+        lunch: dietData.almoco.prato,
+        dinner: dietData.janta.prato,
       },
     });
 
