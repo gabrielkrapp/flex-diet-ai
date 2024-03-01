@@ -1,21 +1,17 @@
 import axios from 'axios';
-import CircuitBreaker from 'opossum';
+import { GenericCircuitBreaker } from '../utils/CircuitBreaker';
 
-class ChatGptService {
-  private circuitBreaker: CircuitBreaker;
+export class ChatGptService {
+  private circuitBreaker: GenericCircuitBreaker;
 
   constructor() {
-    this.circuitBreaker = new CircuitBreaker(this.callChatGptApi, {
-      timeout: 10000,
-      errorThresholdPercentage: 50,
-      resetTimeout: 30000,
-    });
+    this.circuitBreaker = GenericCircuitBreaker.getInstance();
   }
 
-  private async callChatGptApi(prompt: string) {
-    const response = await axios.post(`${process.env.OPENAI_API_URL}`, {
+  public async generateDietPlan(prompt: string): Promise<any> {
+    const fn = () => axios.post(`${process.env.OPENAI_API_URL}`, {
       model: "gpt-3.5-turbo-instruct",
-      prompt: prompt,
+      prompt,
       max_tokens: 200,
       temperature: 0.7
     }, {
@@ -23,13 +19,8 @@ class ChatGptService {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
       }
-    });
-    return response.data;
-  }
-
-  public async generateDietPlan(prompt: string) {
-    return this.circuitBreaker.fire(prompt);
+    }).then(res => res.data);
+    
+    return this.circuitBreaker.execute(fn);
   }
 }
-
-export const chatGptService = new ChatGptService();
