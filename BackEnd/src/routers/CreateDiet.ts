@@ -20,10 +20,10 @@ router.post('/creatediet', verifyToken, async (req, res) => {
     return res.status(400).json({ error: 'Missing diet type or food selections' });
   }
 
-  const prompt = `Generate a diet plan for diet type: ${dietType} with food selections: ${JSON.stringify(foodSelections)}.`;
+  const chatGptPrompt = prompt(dietType, foodSelections);
 
   try {
-    const dietPlan = await chatGptService.generateDietPlan(prompt);
+    const dietPlan = await chatGptService.generateDietPlan(chatGptPrompt!);
     const newDiet = await prisma.diet.create({
       data: {
         userId,

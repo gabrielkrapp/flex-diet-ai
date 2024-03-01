@@ -16,7 +16,6 @@ model User {
   weight      Float
   email       String  @unique
   password    String
-  vegan       Boolean
   biotipo     String
   diabetes    Boolean
   lactose     Boolean
