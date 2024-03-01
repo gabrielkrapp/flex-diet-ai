@@ -2,6 +2,7 @@ import express from 'express';
 import { PrismaClient } from '@prisma/client';
 import { verifyToken } from '../middleware/verifyToken';
 import { ChatGptService } from '../services/ChatGptService';
+import { generatePromptForDietPlan } from '../utils/GeneratePrompt';
 
 const router = express.Router();
 const prisma = new PrismaClient();
@@ -20,10 +21,10 @@ router.post('/creatediet', verifyToken, async (req, res) => {
     return res.status(400).json({ error: 'Missing diet type or food selections' });
   }
 
-  const chatGptPrompt = prompt(dietType, foodSelections);
+  const chatGptPrompt = await generatePromptForDietPlan(userId, dietType, foodSelections);
 
   try {
-    const dietPlan = await chatGptService.generateDietPlan(chatGptPrompt!);
+    const dietPlan = await chatGptService.generateDietPlan(chatGptPrompt);
     const newDiet = await prisma.diet.create({
       data: {
         userId,
