@@ -2,8 +2,6 @@ import request from 'supertest';
 import { app } from '../../../src/index';
 import { PrismaClient } from '@prisma/client';
 
-/// <reference types="jest" />
-
 const prisma = new PrismaClient();
 
 const clearUserTable = async () => {
@@ -28,7 +26,6 @@ describe('/register route', () => {
       dateOfBirth: '2000-01-01',
       height: 170,
       weight: 70,
-      vegan: false,
       biotipo: 'Ectomorph',
       diabetes: false,
       lactose: false,
@@ -52,7 +49,6 @@ describe('/register route', () => {
       dateOfBirth: '2000-01-01',
       height: 170,
       weight: 70,
-      vegan: false,
       biotipo: 'Ectomorph',
       diabetes: false,
       lactose: false,

@@ -8,17 +8,28 @@ datasource db {
 }
 
 model User {
-  id        String  @id @default(uuid())
-  firstName String
-  lastName  String
+  id          String  @id @default(uuid())
+  firstName   String
+  lastName    String
   dateOfBirth String
-  height     Float
-  weight     Float
-  email      String  @unique
-  password   String
-  vegan      Boolean
-  biotipo    String
-  diabetes   Boolean
-  lactose    Boolean
-  gluten     Boolean
+  height      Float
+  weight      Float
+  email       String  @unique
+  password    String
+  biotipo     String
+  diabetes    Boolean
+  lactose     Boolean
+  gluten      Boolean
+  diets       Diet[]
+}
+
+model Diet {
+  id        String @id @default(uuid())
+  userId    String
+  breakfast String
+  lunch     String
+  dinner    String
+  user      User   @relation(fields: [userId], references: [id])
+
+  @@map("diets")
 }

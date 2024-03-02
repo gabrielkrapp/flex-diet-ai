@@ -20,7 +20,6 @@ export async function createUser(userData: any, hashedPassword: string) {
         weight: parseFloat(userData.weight),
         email: userData.email,
         password: hashedPassword,
-        vegan: userData.vegan,
         biotipo: userData.biotipo,
         diabetes: userData.diabetes,
         lactose: userData.lactose,
