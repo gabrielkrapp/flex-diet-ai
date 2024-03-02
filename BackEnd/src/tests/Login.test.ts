@@ -11,7 +11,6 @@ describe('/login route', () => {
       dateOfBirth: '1990-01-01',
       height: 180,
       weight: 70,
-      vegan: false,
       biotipo: 'Ectomorph',
       diabetes: false,
       lactose: false,

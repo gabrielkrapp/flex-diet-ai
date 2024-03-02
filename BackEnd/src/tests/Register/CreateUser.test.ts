@@ -1,5 +1,6 @@
 import { createUser } from '../../../src/routers/Register/CreateUser';
 import { PrismaClient } from '@prisma/client';
+import { hashPassword } from '../../routers/Register/HashPassword';
 
 const prisma = new PrismaClient();
 
@@ -16,14 +17,13 @@ describe('createUser', () => {
       height: '180',
       weight: '80',
       email: 'john.doe@example.com',
-      vegan: true,
       biotipo: 'Ectomorph',
       diabetes: false,
       lactose: true,
       gluten: false,
     };
 
-    const hashedPassword = 'hashedPassword123';
+    const hashedPassword = await hashPassword('hashedPassword123');
 
     const result = await createUser(userData, hashedPassword);
 
@@ -34,7 +34,6 @@ describe('createUser', () => {
       height: 180,
       weight: 80,
       email: 'john.doe@example.com',
-      vegan: true,
       biotipo: 'Ectomorph',
       diabetes: false,
       lactose: true,
@@ -58,7 +57,6 @@ describe('createUser', () => {
         weight: 80,
         email: 'john.doe@example.com',
         password: 'hashedPassword123',
-        vegan: true,
         biotipo: 'Ectomorph',
         diabetes: false,
         lactose: true,
@@ -80,7 +78,7 @@ describe('createUser', () => {
       gluten: false,
     };
 
-    const hashedPassword = 'hashedPassword123';
+    const hashedPassword = await hashPassword('hashedPassword123');
 
     await expect(createUser(userData, hashedPassword)).rejects.toThrow('Email already exists');
   });
