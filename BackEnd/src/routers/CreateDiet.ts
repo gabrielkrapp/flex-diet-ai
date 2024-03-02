@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import { verifyToken } from '../middleware/verifyToken';
 import { ChatGptService } from '../services/ChatGptService';
 import { generatePromptForDietPlan } from '../utils/GeneratePrompt';
+import { parseDietPlanFromResponse } from '../utils/ParseDietPlanFromResponse';
 
 
 const router = express.Router();
@@ -33,17 +34,24 @@ router.post('/creatediet', verifyToken, async (req, res) => {
 
   try {
     const chatGPTResponse = await chatGptService.generateDietPlan(chatGptPrompt);
-  {/*    const dietData = JSON.parse(chatGPTResponse.choices[0].text.trim());
+    const dietData = parseDietPlanFromResponse(chatGPTResponse);
     const newDiet = await prisma.diet.create({
       data: {
         userId,
-        breakfast: dietData.cafe_da_manha.prato,
-        lunch: dietData.almoco.prato,
-        dinner: dietData.janta.prato,
+        breakfast: dietData.breakfast,
+        lunch: dietData.lunch,
+        dinner: dietData.dinner,
       },
-    });*/}
+    });
 
-    return res.status(201).json({ dietPlan: chatGPTResponse });
+    return res.status(201).json({
+      dietPlan: {
+        breakfast: newDiet.breakfast,
+        lunch: newDiet.lunch,
+        dinner: newDiet.dinner,
+      }
+    });
+    
   } catch (error) {
     console.error('Error creating diet:', error);
     return res.status(500).json({ error: 'Internal server error' });

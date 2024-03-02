@@ -1,7 +1,7 @@
 import { DietData } from "../interfaces/DietData";
 import { Meals, MealKeys } from "../interfaces/Meals";
 
-function parseDietPlanFromResponse(chatGptResponse: any): Meals {
+export function parseDietPlanFromResponse(chatGptResponse: any): Meals {
     const textResponse: string = chatGptResponse.choices[0].text.trim();
     const dietData: DietData = JSON.parse(textResponse);
   
