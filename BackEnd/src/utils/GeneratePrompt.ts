@@ -1,5 +1,6 @@
-import { formatUserDetailsForPrompt } from "./formatUserDetailsForPrompt";
-import { getUserDetails } from "./getUserDetails";
+import { formatUserDetailsForPrompt } from "./FormatUserDetailsForPrompt";
+import { getUserDetails } from "./GetUserDetails";
+
 
 
 export async function generatePromptForDietPlan(userId: string, dietType: string, foodSelections: Record<string, boolean>) {
