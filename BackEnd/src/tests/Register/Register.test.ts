@@ -13,7 +13,24 @@ describe('/register route', () => {
     await clearUserTable();
   });
 
+  beforeAll(async () => {
+        await prisma.diet.deleteMany({
+      where: {
+        user: {
+          email: 'testuser@example.com',
+        },
+      },
+    });
+
+    await prisma.user.deleteMany({
+      where: {
+        email: 'testuser@example.com',
+      },
+    });
+  });
+
   afterAll(async () => {
+    await prisma.user.deleteMany({});
     await prisma.$disconnect();
   });
 

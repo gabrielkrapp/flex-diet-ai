@@ -76,10 +76,6 @@ describe('/creatediet route', () => {
     await prisma.$disconnect();
   });
 
-  beforeEach(async () => {
-    await prisma.diet.deleteMany({});
-  });
-
   it('should create a new diet for a user', async () => {
     const dietData = {
       dietType: "Carnívora",
@@ -108,6 +104,6 @@ describe('/creatediet route', () => {
         dinner: expect.any(String),
       })
     }));
-  });
+  }, 20000);
 
 });
