@@ -10,23 +10,11 @@ const clearUserTable = async () => {
 
 describe('/register route', () => {
   beforeEach(async () => {
-    await prisma.diet.deleteMany({
-      where: {
-        user: {
-          email: 'testuser@example.com',
-        },
-      },
-    });
-
-    await prisma.user.deleteMany({
-      where: {
-        email: 'testuser@example.com',
-      },
-    });
+    await clearUserTable();
   });
 
   beforeAll(async () => {
-    await prisma.diet.deleteMany({
+        await prisma.diet.deleteMany({
       where: {
         user: {
           email: 'testuser@example.com',
@@ -42,25 +30,13 @@ describe('/register route', () => {
   });
 
   afterAll(async () => {
-    await prisma.diet.deleteMany({
-      where: {
-        user: {
-          email: 'testuser@example.com',
-        },
-      },
-    });
-    
-    await prisma.user.deleteMany({
-      where: {
-        email: 'testuser@example.com',
-      },
-    });
+    await prisma.user.deleteMany({});
     await prisma.$disconnect();
   });
 
   it('should register a new user and return a token', async () => {
     const userData = {
-      email: 'testuser@example.com',
+      email: 'test@example.com',
       password: 'password123',
       firstName: 'Test',
       lastName: 'User',
@@ -83,7 +59,7 @@ describe('/register route', () => {
 
   it('should not register a user with an existing email', async () => {
     const userData = {
-      email: 'testuser@example.com',
+      email: 'test@example.com',
       password: 'password123',
       firstName: 'Test',
       lastName: 'User',
