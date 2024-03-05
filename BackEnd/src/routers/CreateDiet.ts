@@ -6,7 +6,6 @@ import { generatePromptForDietPlan } from '../utils/GeneratePrompt';
 import { parseDietPlanFromResponse } from '../utils/ParseDietPlanFromResponse';
 import { createDietLimiter } from '../middleware/rateLimiters';
 
-
 const router = express.Router();
 const prisma = new PrismaClient();
 const chatGptService = new ChatGptService();
@@ -16,7 +15,6 @@ declare module 'express-serve-static-core' {
     user?: { id: string };
   }
 }
-
 
 router.post('/creatediet', verifyToken, createDietLimiter, async (req, res) => {
 
