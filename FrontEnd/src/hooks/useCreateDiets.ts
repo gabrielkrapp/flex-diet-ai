@@ -7,7 +7,7 @@ export const useCreateDiet = () => {
 
   const { mutate, isLoading, isError, error } = useMutation(
     (dietData: { dietType: string, foodSelections: Record<string, boolean> }) => 
-      axiosInstance.post(`${process.env.NEXT_BACKEND_URL}/creatediet`, dietData),
+      axiosInstance.post(`/creatediet`, dietData),
     {
       onSuccess: (data) => {
         const dietId = data.data.id;

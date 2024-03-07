@@ -8,6 +8,7 @@ import Cookie from 'js-cookie';
 import { validateLoginForm } from "@/utils/validateLoginForm";
 import { CustomAlert } from "../Atoms/Alerts";
 import { LoginFormErrors } from "@/interfaces/LoginFormErrors";
+import axiosInstance from "@/utils/axiosInstance";
 
 export const AuthForm: React.FC = () => {
   const initialState: LoginFormData = { email: "", password: "" };
@@ -21,7 +22,7 @@ export const AuthForm: React.FC = () => {
   }, []);
 
   const authMutation = useMutation(
-    () => axios.post(`/login`, formData),
+    () => axiosInstance.post(`/login`, formData),
     {
       onSuccess: (data) => {
         Cookie.set(process.env.NEXT_PUBLIC_USER_TOKEN!, data.data.token);

@@ -15,11 +15,11 @@ const DietDisplayPage = () => {
     router.push('/');
   };
 
-  //if (isLoading) return <LoadingComponent />;
-  //if (isError) {
-    //router.push(`/`);
-    //<CustomAlert severity="error">Ocorreu um erro ao carregar suas dietas.</CustomAlert>
-  //}
+  if (isLoading) return <LoadingComponent />;
+  if (isError) {
+    router.push(`/`);
+    <CustomAlert severity="error">Ocorreu um erro ao carregar suas dietas.</CustomAlert>
+  }
 
   return (
     <>
@@ -35,11 +35,11 @@ const DietDisplayPage = () => {
             </button>
             <h1 className="text-4xl font-bold text-center">Detalhes da Dieta</h1>
           </div>
-          {/*dietDetails && (
+          {dietDetails && (
             <div className="flex flex-col items-center justify-center">
               <TableDiet />
             </div>
-          )*/}
+          )}
           <div className="flex flex-col items-center justify-center mt-5 pr-52 pl-52">
             <TableDiet />
           </div>
