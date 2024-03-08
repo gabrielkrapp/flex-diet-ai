@@ -14,6 +14,7 @@ export const AuthForm: React.FC = () => {
   const initialState: LoginFormData = { email: "", password: "" };
   const [formData, setFormData] = useState<LoginFormData>(initialState);
   const [formErrors, setFormErrors] = useState<LoginFormErrors>({});
+  const [openAlert, setOpenAlert] = useState(false);
   const router = useRouter();
 
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +30,7 @@ export const AuthForm: React.FC = () => {
         router.push("/");
       },
       onError: () => {
-        <CustomAlert severity="error">Falha ao autenticar, por favor tente novamente.</CustomAlert>
+        setOpenAlert(true);
       },
     }
   );
@@ -47,6 +48,7 @@ export const AuthForm: React.FC = () => {
 
   return (
     <form className="mt-8" onSubmit={handleSubmit}>
+      {openAlert && <CustomAlert severity="error">Falha ao autenticar, por favor tente novamente.</CustomAlert>}
       <div className="rounded-md shadow-sm">
         <AuthFormFields formData={formData} handleInputChange={handleInputChange} formErrors={formErrors} />
       </div>
