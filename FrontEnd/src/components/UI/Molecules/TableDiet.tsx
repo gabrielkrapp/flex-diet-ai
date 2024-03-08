@@ -1,57 +1,48 @@
 import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import '../../../styles/TableDiet.css';
+import { DietDetail } from '@/interfaces/DietDetailProps';
+import { TableRowData } from '@/interfaces/TableRowDataProps';
 
-function createRow(
-  meal: string,
-  description: string,
-  calories: number,
-) {
-  const formattedDescription = description.replace(/, /g, "\n");
-  return { meal, description, calories, formattedDescription };
+interface TableDietProps {
+  dietDetails: DietDetail;
 }
 
-const rows = [
-  createRow('Café da Manhã', 'Ovos mexidos (3 unidades), Pão integral (2 fatias), Aveia (3 colheres de sopa), Banana (1 unidade), Leite integral (1 copo)', 350),
-  createRow('Almoço', 'Arroz integral (1 xícara), Feijão (1 concha), Peito de frango grelhado (150g), Brócolis cozidos (1 xícara), Abacate (1/2 unidade)', 450),
-  createRow('Jantar', 'Quinoa cozida (1 xícara), Salmão grelhado (150g), Aspargos grelhados (1 xícara), Batata doce cozida (1 média)', 400)
-];
+export default function TableDiet({ dietDetails }: TableDietProps) {
+  function createRow(meal: string, description: string): TableRowData {
+    return { meal, description };
+  }
 
-const totalCalories = rows.reduce((sum, row) => sum + row.calories, 0);
+  const rows = [
+    createRow('Café da Manhã', dietDetails.breakfast),
+    createRow('Almoço', dietDetails.lunch),
+    createRow('Jantar', dietDetails.dinner)
+  ];
 
-export default function TableDiet() {
   return (
-    <TableContainer component={Paper} className="shadow-lg rounded-lg overflow-hidden my-5">
-      <Table className="min-w-full">
-        <TableHead className="bg-teal-700">
-          <TableRow>
-            <TableCell className="text-white font-bold" style={{ width: '20%' }}>Refeição</TableCell>
-            <TableCell className="text-white font-bold" align="center" style={{ width: '50%' }}>Alimentos</TableCell>
-            <TableCell className="text-white font-bold" align="center" style={{ width: '30%' }}>Calorias</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.meal} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell component="th" scope="row">
+    <div className="overflow-x-auto relative shadow-lg rounded-lg bg-gradient-to-b from-white to-17AD9F dark:from-gray-800 dark:to-gray-700">
+      <table className="w-full text-sm text-left text-gray-700 dark:text-gray-400">
+        <thead className="text-xs uppercase bg-gradient-to-r from-gray-100 to-17AD9F dark:from-gray-700 dark:to-gray-400">
+          <tr>
+            <th scope="col" className="py-3 px-6 font-medium">
+              Refeição
+            </th>
+            <th scope="col" className="py-3 px-6 font-medium">
+              Descrição
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={index} className="bg-white dark:bg-gray-800 border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <td className="py-4 px-6 whitespace-nowrap">
                 {row.meal}
-              </TableCell>
-              <TableCell align="center" className="description-cell">{row.formattedDescription}</TableCell>
-              <TableCell align="center">{row.calories}</TableCell>
-            </TableRow>
+              </td>
+              <td className="py-4 px-6">
+                {row.description}
+              </td>
+            </tr>
           ))}
-          <TableRow>
-            <TableCell colSpan={2} className="text-lg font-semibold">Total de Calorias</TableCell>
-            <TableCell align="center" className="text-lg font-semibold">{totalCalories}</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
+        </tbody>
+      </table>
+    </div>
   );
 }

@@ -3,7 +3,7 @@ import axiosInstance from '@/utils/axiosInstance';
 
 export const useFetchDiets = () => {
   return useQuery('diets', async () => {
-    const { data } = await axiosInstance.get(`${process.env.NEXT_BACKEND_URL}/getdiets`);
+    const { data } = await axiosInstance.get(`/getdiets`);
     return data;
   });
 };

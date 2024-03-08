@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { Button, Typography } from '@mui/material';
 import { FoodOption } from './FoodOption';
 import { ErrorMessage } from '../Atoms/ErrorMessage';
+import { LoadingComponent } from '../Atoms/LoadingComponent';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -23,7 +24,7 @@ const style = {
 
 export const ModalDiet: React.FC<ModalDietProps> = ({ modalOpen, setModalOpen }) => {
   const handleClose = () => setModalOpen(false);
-  const { mutate } = useCreateDiet();
+  const { mutate, isLoading } = useCreateDiet();
   const [dietOptions, setDietOptions] = useState('');
   const [foodSelections, setFoodSelections] = useState<Record<string, boolean>>({});
   const [error, setError] = useState('');
@@ -44,6 +45,7 @@ export const ModalDiet: React.FC<ModalDietProps> = ({ modalOpen, setModalOpen })
         onClose={handleClose}
       >
         <Box sx={style}>
+          {isLoading && <LoadingComponent />}
           <Typography variant="h6" className="text-lg font-semibold text-center text-gray-800 mb-3">Selecione um tipo de dieta</Typography>
           <DietOption dietOptions={dietOptions} setDietOptions={setDietOptions} setFoodSelections={setFoodSelections} foodSelections={foodSelections} />
           <Typography variant="h6" className="text-lg font-semibold text-center text-gray-800 mt-8">Selecione os alimentos de sua preferência</Typography>

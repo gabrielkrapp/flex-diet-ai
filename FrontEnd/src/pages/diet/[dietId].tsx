@@ -5,21 +5,25 @@ import { CustomAlert } from '@/components/UI/Atoms/Alerts';
 import TableDiet from '@/components/UI/Molecules/TableDiet';
 import { Navbar } from '@/components/UI/Organisms/Navbar';
 import { FiArrowLeft } from 'react-icons/fi';
+import { useEffect, useState } from 'react';
 
 const DietDisplayPage = () => {
   const router = useRouter();
   const { dietId } = router.query;
-  const { data: dietDetails, isLoading, isError } = useFetchDietDetails(dietId);
+  const { data: dietDetails, isLoading, isError } = useFetchDietDetails(dietId as string);
+
+  useEffect(() => {
+    if (!dietDetails && !isLoading && isError) {
+      router.push('/');
+      <CustomAlert severity="error">Detalhes da dieta não encontrados.</CustomAlert>
+    }
+  }, [dietDetails, isLoading, isError, router]);
 
   const handleBack = () => {
     router.push('/');
   };
 
-  //if (isLoading) return <LoadingComponent />;
-  //if (isError) {
-    //router.push(`/`);
-    //<CustomAlert severity="error">Ocorreu um erro ao carregar suas dietas.</CustomAlert>
-  //}
+  if (isLoading) return <LoadingComponent />;
 
   return (
     <>
@@ -35,14 +39,11 @@ const DietDisplayPage = () => {
             </button>
             <h1 className="text-4xl font-bold text-center">Detalhes da Dieta</h1>
           </div>
-          {/*dietDetails && (
+          {dietDetails && (
             <div className="flex flex-col items-center justify-center">
-              <TableDiet />
+              <TableDiet dietDetails={dietDetails} />
             </div>
-          )*/}
-          <div className="flex flex-col items-center justify-center mt-5 pr-52 pl-52">
-            <TableDiet />
-          </div>
+          )}
         </div>
       </div>
     </>
