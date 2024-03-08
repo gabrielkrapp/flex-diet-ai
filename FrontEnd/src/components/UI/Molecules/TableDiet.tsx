@@ -1,11 +1,4 @@
 import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import { DietDetail } from '@/interfaces/DietDetailProps';
 import { TableRowData } from '@/interfaces/TableRowDataProps';
 
@@ -25,25 +18,31 @@ export default function TableDiet({ dietDetails }: TableDietProps) {
   ];
 
   return (
-    <TableContainer component={Paper} className="shadow-lg rounded-lg overflow-hidden my-5">
-      <Table className="min-w-full">
-        <TableHead className="bg-teal-700">
-          <TableRow>
-            <TableCell className="text-white font-bold" style={{ width: '30%' }}>Refeição</TableCell>
-            <TableCell className="text-white font-bold" align="center" style={{ width: '70%' }}>Descrição</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
+    <div className="overflow-x-auto relative shadow-lg rounded-lg bg-gradient-to-b from-white to-17AD9F dark:from-gray-800 dark:to-gray-700">
+      <table className="w-full text-sm text-left text-gray-700 dark:text-gray-400">
+        <thead className="text-xs uppercase bg-gradient-to-r from-gray-100 to-17AD9F dark:from-gray-700 dark:to-gray-400">
+          <tr>
+            <th scope="col" className="py-3 px-6 font-medium">
+              Refeição
+            </th>
+            <th scope="col" className="py-3 px-6 font-medium">
+              Descrição
+            </th>
+          </tr>
+        </thead>
+        <tbody>
           {rows.map((row, index) => (
-            <TableRow key={index}>
-              <TableCell component="th" scope="row">
+            <tr key={index} className="bg-white dark:bg-gray-800 border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <td className="py-4 px-6 whitespace-nowrap">
                 {row.meal}
-              </TableCell>
-              <TableCell align="center">{row.description}</TableCell>
-            </TableRow>
+              </td>
+              <td className="py-4 px-6">
+                {row.description}
+              </td>
+            </tr>
           ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+        </tbody>
+      </table>
+    </div>
   );
 }
