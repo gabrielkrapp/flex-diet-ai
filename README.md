@@ -1,6 +1,6 @@
 # Flex Diet AI
 
-![Logo](https://github.com/gabrielkrapp/flex-diet-ai/assets/109620152/e1430b6e-ee9f-4756-81c9-384f28911090)
+<img src="https://github.com/gabrielkrapp/flex-diet-ai/assets/109620152/4be6ff99-63ce-4d65-819c-546e3b27334c" width="300" height="300" />
 
 Welcome to the repository for Flex Diet AI, an innovative application designed to deliver personalized nutrition plans using advanced AI technology.
 
