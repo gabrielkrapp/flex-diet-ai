@@ -20,6 +20,7 @@ model User {
   diabetes    Boolean
   lactose     Boolean
   gluten      Boolean
+  lastToken   String? @db.VarChar(255)
   diets       Diet[]
 }
 

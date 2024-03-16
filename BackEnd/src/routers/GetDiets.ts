@@ -1,11 +1,11 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
-import { verifyToken } from '../middleware/verifyToken';
+import { verifyTokenAndRateLimit } from '../middleware/verifyTokenAndRateLimit';
 
 const router = express.Router();
 const prisma = new PrismaClient();
 
-router.get('/getdiets', verifyToken, async (req, res) => {
+router.get('/getdiets', verifyTokenAndRateLimit, async (req, res) => {
     
     if (!req.user) {
       return res.status(403).json({ error: 'User ID not found in token' });
