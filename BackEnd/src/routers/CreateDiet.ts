@@ -1,10 +1,9 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
-import { verifyToken } from '../middleware/verifyToken';
 import { ChatGptService } from '../services/ChatGptService';
 import { generatePromptForDietPlan } from '../utils/GeneratePrompt';
 import { parseDietPlanFromResponse } from '../utils/ParseDietPlanFromResponse';
-import { createDietLimiter } from '../middleware/rateLimiters';
+import { verifyTokenAndRateLimit } from '../middleware/verifyTokenAndRateLimit';
 
 const router = express.Router();
 const prisma = new PrismaClient();
@@ -16,7 +15,7 @@ declare module 'express-serve-static-core' {
   }
 }
 
-router.post('/creatediet', verifyToken, createDietLimiter, async (req, res) => {
+router.post('/creatediet', verifyTokenAndRateLimit, async (req, res) => {
 
   if (!req.user) {
     return res.status(403).json({ error: 'User ID not found in token' });
